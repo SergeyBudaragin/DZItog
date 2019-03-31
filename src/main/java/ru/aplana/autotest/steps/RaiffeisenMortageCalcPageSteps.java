@@ -3,15 +3,12 @@ package ru.aplana.autotest.steps;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
 import io.cucumber.datatable.DataTable;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.aplana.autotest.pages.RaiffeisenMortgageCalcPage;
-import ru.aplana.autotest.utils.Init;
 
 import java.util.Map;
 
 public class RaiffeisenMortageCalcPageSteps {
     RaiffeisenMortgageCalcPage raiffeisenMortgageCalcPage = new RaiffeisenMortgageCalcPage();
-    WebDriverWait wait = new WebDriverWait(Init.getDriver(), 10, 2000);
 
     @Тогда("сравнивается заголовок страницы с \"(.*)\"")
     public void titleCheck(String expected) {
@@ -23,10 +20,9 @@ public class RaiffeisenMortageCalcPageSteps {
         Map<String, String> dataMap = param.asMap(String.class, String.class);
 
         //Выбор города
-        if (dataMap.get("Город").contains("Москва")) {
-            raiffeisenMortgageCalcPage.city.click();
-            raiffeisenMortgageCalcPage.selectMenuItem(raiffeisenMortgageCalcPage.cityList, dataMap.get("Город"));
-        }
+        raiffeisenMortgageCalcPage.city.click();
+        raiffeisenMortgageCalcPage.selectMenuItem(raiffeisenMortgageCalcPage.cityList, dataMap.get("Город"));
+
 
         // Чек-бокс Знаю свою ипотечную программу
         if (dataMap.get("Знаю свою ипотечную программу").contains("Да")) {
